@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './App.css';
 
 class App extends Component {
   constructor(props) {
@@ -14,8 +15,25 @@ class App extends Component {
       .then(json => this.setState({ posts:json }))
   }
   render() {
+    const { posts } = this.state;
     return (
-      <p>Hello World!</p>
+      <div className="container">
+        <div className="jumbotron">
+          <h1 className="display-4">Blog posts</h1>
+        </div>
+        {
+          posts.map((post) => (
+            <div className="card" key={ post.id }>
+              <div className="card-header">
+                # { post.id } { post.title }
+              </div>
+              <div className="card-body">
+                <p className="card-text">{ post.body }</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
     );
   }
 }
